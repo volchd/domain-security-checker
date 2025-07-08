@@ -1,0 +1,169 @@
+{
+  "domain": "yahoo.com",
+  "scores": {
+    "spf": {
+      "totalScore": 30,
+      "maxPossibleScore": 40,
+      "percentage": 75,
+      "grade": "C",
+      "scoreItems": [
+        {
+          "name": "SPF Record Present",
+          "description": "SPF TXT record exists on the domain (with correct v=spf1). If missing, domain is unprotected by SPF.",
+          "score": 10,
+          "maxScore": 10,
+          "passed": true,
+          "details": "SPF record found"
+        },
+        {
+          "name": "Single SPF Record",
+          "description": "Only one SPF record is published (no duplicates). Multiple records cause SPF failure.",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "Single SPF record found"
+        },
+        {
+          "name": "SPF Syntax Valid",
+          "description": "SPF record is syntactically correct (no obvious errors, unrecognized mechanisms, or syntax violations).",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "Syntax validation passed"
+        },
+        {
+          "name": "Authorized Sources ≤ 10 Lookups",
+          "description": "SPF includes/redirects do not exceed 10 DNS lookups. (Staying within RFC limit avoids permerror.)",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "DNS lookups within limit"
+        },
+        {
+          "name": "No \"Pass All\" Mechanism",
+          "description": "SPF does not use +all which would allow any sender.",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "No unsafe +all mechanism found"
+        },
+        {
+          "name": "All Mechanism Policy",
+          "description": "SPF uses an appropriate policy on \"all\": -all (hard fail) configured: 5 points (strict enforcement). ~all (soft fail): 3 points (partial credit, more relaxed). ?all or no all: 0 (neutral or missing policy is poor).",
+          "score": 0,
+          "maxScore": 5,
+          "passed": false,
+          "details": "Neutral (?all) configured: poor policy"
+        },
+        {
+          "name": "No Deprecated Mechanisms",
+          "description": "SPF record does not use deprecated mechanisms like ptr. (If none, give 2 points; if present, 0.)",
+          "score": 0,
+          "maxScore": 5,
+          "passed": false,
+          "details": "Deprecated mechanisms found"
+        }
+      ]
+    },
+    "dkim": {
+      "totalScore": 15,
+      "maxPossibleScore": 20,
+      "percentage": 75,
+      "scoreItems": [
+        {
+          "name": "DKIM Implemented",
+          "description": "At least one DKIM public key record is published for the domain.",
+          "score": 10,
+          "maxScore": 10,
+          "passed": true,
+          "details": "Found 1 DKIM record(s)"
+        },
+        {
+          "name": "DKIM Key Length",
+          "description": "Strength of DKIM keys in DNS: 2048-bit (or higher): 5 points. 1024-bit: 3 points. <1024-bit: 0.",
+          "score": 3,
+          "maxScore": 5,
+          "passed": true,
+          "details": "s1024: 1024 bits"
+        },
+        {
+          "name": "DKIM Multiple Selectors",
+          "description": "Domain has at least two DKIM selectors/keys set up (facilitates key rotation).",
+          "score": 0,
+          "maxScore": 3,
+          "passed": false,
+          "details": "Only one selector found"
+        },
+        {
+          "name": "No DKIM Test Mode",
+          "description": "DKIM DNS records are in normal mode (no t=y flags set, indicating no lingering test-mode).",
+          "score": 2,
+          "maxScore": 2,
+          "passed": true,
+          "details": "No test mode flags found"
+        }
+      ]
+    },
+    "dmarc": {
+      "totalScore": 40,
+      "maxPossibleScore": 40,
+      "percentage": 100,
+      "scoreItems": [
+        {
+          "name": "DMARC Record Present",
+          "description": "DMARC TXT record found at _dmarc.domain. If missing, that's a major gap.",
+          "score": 10,
+          "maxScore": 10,
+          "passed": true,
+          "details": "DMARC record found"
+        },
+        {
+          "name": "DMARC Policy Enforcement",
+          "description": "The strictness of the DMARC policy (p=): reject=10, quarantine=8, none=3.",
+          "score": 10,
+          "maxScore": 10,
+          "passed": true,
+          "details": "Policy is 'reject' (full enforcement)"
+        },
+        {
+          "name": "DMARC Coverage for Subdomains",
+          "description": "Subdomain policy in place (sp=) and not weaker than p, or not needed.",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "No subdomain policy set or not needed"
+        },
+        {
+          "name": "DMARC Alignment Mode",
+          "description": "Alignment setting (aspf/adkim): 2 points if relaxed (default) or strict, 0 if misconfigured.",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "aspf=r, adkim=r"
+        },
+        {
+          "name": "DMARC Reporting (RUA)",
+          "description": "Aggregate reporting address (rua) is specified to receive feedback.",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "rua=d@rua.agari.com"
+        },
+        {
+          "name": "DMARC Policy Percentage",
+          "description": "If a policy is enforced (quarantine/reject), check that pct is 100 (full coverage).",
+          "score": 5,
+          "maxScore": 5,
+          "passed": true,
+          "details": "pct=100"
+        }
+      ]
+    }
+  },
+  "totalScore": 85,
+  "maxPossibleScore": 100,
+  "percentage": 85,
+  "requestId": "f265de07-780d-499a-919f-e9b0f4b06426",
+  "responseTime": 881,
+  "timestamp": "2025-07-08T21:32:14.173Z"
+}

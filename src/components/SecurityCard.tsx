@@ -129,17 +129,6 @@ export const SecurityCard: React.FC<SecurityCardProps> = ({
             <Typography variant="h6" fontWeight="600" color={getGradeColor(score.percentage)}>
               {score.percentage}%
             </Typography>
-            {score.grade && (
-              <Chip
-                label={score.grade}
-                size="small"
-                sx={{
-                  backgroundColor: getGradeColor(score.percentage),
-                  color: 'white',
-                  fontWeight: '600'
-                }}
-              />
-            )}
           </Box>
         </Box>
 

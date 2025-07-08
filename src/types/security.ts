@@ -11,7 +11,6 @@ export interface SecurityScore {
   totalScore: number;
   maxPossibleScore: number;
   percentage: number;
-  grade?: string;
   scoreItems: ScoreItem[];
 }
 

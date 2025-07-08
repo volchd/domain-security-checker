@@ -25,16 +25,28 @@ const MotionPaper = motion(Paper);
 
 export const DomainInput: React.FC<DomainInputProps> = ({ onSearch, loading = false }) => {
   const [domain, setDomain] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestions = ['google.com', 'microsoft.com', 'github.com'];
+  const filteredSuggestions = domain
+    ? suggestions.filter((s) => s.startsWith(domain.toLowerCase()) && s !== domain.toLowerCase())
+    : [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (domain.trim()) {
       onSearch(domain.trim());
+      setShowSuggestions(false);
     }
   };
 
   const handleClear = () => {
     setDomain('');
+    setShowSuggestions(false);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setDomain(suggestion);
+    setShowSuggestions(false);
   };
 
   const isValidDomain = (input: string) => {
@@ -79,12 +91,17 @@ export const DomainInput: React.FC<DomainInputProps> = ({ onSearch, loading = fa
         </Typography>
       </Box>
 
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <Box sx={{ position: 'relative', display: 'flex', gap: 2, alignItems: 'center' }}>
           <TextField
             fullWidth
             value={domain}
-            onChange={(e) => setDomain(e.target.value)}
+            onChange={(e) => {
+              setDomain(e.target.value);
+              setShowSuggestions(true);
+            }}
+            onFocus={() => domain && setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 120)}
             placeholder="Enter domain (e.g., example.com)"
             variant="outlined"
             size="medium"
@@ -129,6 +146,50 @@ export const DomainInput: React.FC<DomainInputProps> = ({ onSearch, loading = fa
               }
             }}
           />
+          {/* Dropdown Suggestions */}
+          {showSuggestions && filteredSuggestions.length > 0 && (
+            <Box
+              sx={{
+                position: 'absolute',
+                left: 0,
+                top: 56,
+                width: '100%',
+                zIndex: 10,
+                background: 'rgba(255,255,255,0.98)',
+                color: '#333',
+                borderRadius: 2,
+                boxShadow: '0 4px 16px 0 rgba(80,80,120,0.15)',
+                border: '1px solid #e0e0e0',
+                mt: 1,
+                py: 1,
+                px: 0.5
+              }}
+            >
+              {filteredSuggestions.map((s) => (
+                <Box
+                  key={s}
+                  onMouseDown={() => handleSuggestionClick(s)}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    px: 2,
+                    py: 1.2,
+                    borderRadius: 1.5,
+                    cursor: 'pointer',
+                    fontWeight: 500,
+                    fontSize: '1rem',
+                    transition: 'background 0.15s',
+                    '&:hover': {
+                      background: 'rgba(102,126,234,0.10)',
+                    },
+                  }}
+                >
+                  <Domain sx={{ fontSize: 18, color: '#764ba2', mr: 1 }} />
+                  {s}
+                </Box>
+              ))}
+            </Box>
+          )}
           <Button
             type="submit"
             variant="contained"

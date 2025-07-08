@@ -152,8 +152,8 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
         </Box>
       </MotionPaper>
 
-      {/* Security Cards Grid */}
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 3 }}>
+      {/* Security Cards Stack */}
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <SecurityCard
           title="SPF Protection"
           score={report.scores.spf}

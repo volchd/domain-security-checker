@@ -21,7 +21,7 @@ interface DomainInputProps {
   loading?: boolean;
 }
 
-const MotionPaper = motion(Paper);
+const MotionPaper = motion.create(Paper);
 
 export const DomainInput: React.FC<DomainInputProps> = ({ onSearch, loading = false }) => {
   const [domain, setDomain] = useState('');

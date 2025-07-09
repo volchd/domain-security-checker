@@ -133,7 +133,7 @@ function App() {
           )}
         </Box>
 
-        <Footer />
+        <Footer onNavigate={handleNavigation} />
       </Box>
 
       <Snackbar

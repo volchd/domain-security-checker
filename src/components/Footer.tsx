@@ -1,7 +1,11 @@
 import { Box, Container, Typography, Link, Divider } from '@mui/material';
 import { GitHub, Security, Code } from '@mui/icons-material';
 
-export const Footer = () => {
+interface FooterProps {
+  onNavigate?: (page: 'main' | 'spf' | 'dkim') => void;
+}
+
+export const Footer = ({ onNavigate }: FooterProps) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -35,25 +39,39 @@ export const Footer = () => {
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 4 }}>
             <Box>
               <Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#1a202c', mb: 1 }}>
-                FreeTools
+                Free Tools
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
                 <Link 
-                  href="#" 
+                  component="button"
+                  onClick={() => onNavigate?.('spf')}
                   sx={{ 
                     color: '#64748b', 
                     textDecoration: 'none',
-                    '&:hover': { color: '#667eea' }
+                    '&:hover': { color: '#667eea' },
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    fontFamily: 'inherit',
+                    fontSize: 'inherit'
                   }}
                 >
                   SPF Checker
                 </Link>
                 <Link 
-                  href="#" 
+                  component="button"
+                  onClick={() => onNavigate?.('dkim')}
                   sx={{ 
                     color: '#64748b', 
                     textDecoration: 'none',
-                    '&:hover': { color: '#667eea' }
+                    '&:hover': { color: '#667eea' },
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    fontFamily: 'inherit',
+                    fontSize: 'inherit'
                   }}
                 >
                   DKIM Checker

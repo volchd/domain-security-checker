@@ -11,12 +11,6 @@ import {
   Alert,
   CircularProgress,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   List,
   ListItem,
   ListItemText,
@@ -228,86 +222,16 @@ export function DkimChecker({ onBack }: DkimCheckerProps) {
           </Card>
 
           {/* DKIM Records */}
-          <Card sx={{ mb: 4 }}>
+          <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 DKIM Records Analysis
               </Typography>
-              <TableContainer component={Paper} variant="outlined">
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Selector</TableCell>
-                      <TableCell>Key Type</TableCell>
-                      <TableCell>Key Length</TableCell>
-                      <TableCell>Version</TableCell>
-                      <TableCell>Flags</TableCell>
-                      <TableCell>Notes</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {report.records.map((record, index) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <Typography variant="body2" sx={{ fontFamily: 'monospace', fontWeight: 'bold' }}>
-                            {record.selector}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={record.parsedData.keyType || 'Unknown'}
-                            size="small"
-                            variant="outlined"
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={`${getKeyLength(record.parsedData.publicKey)} bits`}
-                            size="small"
-                            color={getKeyLength(record.parsedData.publicKey) >= 2048 ? 'success' : 'warning'}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          {record.parsedData.version || 'N/A'}
-                        </TableCell>
-                        <TableCell>
-                          {record.parsedData.flags && record.parsedData.flags.length > 0 ? (
-                            <Box sx={{ display: 'flex', gap: 0.5 }}>
-                              {record.parsedData.flags.map((flag, flagIndex) => (
-                                <Chip
-                                  key={flagIndex}
-                                  label={flag}
-                                  size="small"
-                                  variant="outlined"
-                                />
-                              ))}
-                            </Box>
-                          ) : (
-                            'None'
-                          )}
-                        </TableCell>
-                        <TableCell>
-                          {record.parsedData.notes || 'N/A'}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </CardContent>
-          </Card>
-
-          {/* Detailed Records */}
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Detailed DKIM Records
-              </Typography>
               {report.records.map((record, index) => (
                 <Accordion key={index} sx={{ mb: 1 }}>
                   <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%', flexWrap: 'wrap' }}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 'bold', minWidth: '120px' }}>
                         Selector: {record.selector}
                       </Typography>
                       <Chip
@@ -320,6 +244,34 @@ export function DkimChecker({ onBack }: DkimCheckerProps) {
                         size="small"
                         color={getKeyLength(record.parsedData.publicKey) >= 2048 ? 'success' : 'warning'}
                       />
+                      {record.parsedData.version && (
+                        <Chip
+                          label={`v${record.parsedData.version}`}
+                          size="small"
+                          variant="outlined"
+                        />
+                      )}
+                      {record.parsedData.flags && record.parsedData.flags.length > 0 && (
+                        <Box sx={{ display: 'flex', gap: 0.5 }}>
+                          {record.parsedData.flags.map((flag, flagIndex) => (
+                            <Chip
+                              key={flagIndex}
+                              label={flag}
+                              size="small"
+                              variant="outlined"
+                              color="info"
+                            />
+                          ))}
+                        </Box>
+                      )}
+                      {record.parsedData.notes && (
+                        <Chip
+                          label={record.parsedData.notes}
+                          size="small"
+                          variant="outlined"
+                          color="secondary"
+                        />
+                      )}
                     </Box>
                   </AccordionSummary>
                   <AccordionDetails>

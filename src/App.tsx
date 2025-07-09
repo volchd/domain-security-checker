@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import { DomainInput } from './components/DomainInput';
 import { SecurityDashboard } from './components/SecurityDashboard';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 import type { SecurityReport } from './types/security';
 
 // API configuration
@@ -95,21 +97,28 @@ function App() {
       <Box
         sx={{
           minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
           background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-          py: 4
         }}
       >
-        <Container maxWidth="lg">
-          <DomainInput onSearch={handleSearch} loading={loading} />
-          
-          {report && (
-            <SecurityDashboard 
-              report={report} 
-              loading={loading} 
-              error={error || undefined}
-            />
-          )}
-        </Container>
+        <Header />
+        
+        <Box sx={{ flex: 1, py: 4 }}>
+          <Container maxWidth="lg">
+            <DomainInput onSearch={handleSearch} loading={loading} />
+            
+            {report && (
+              <SecurityDashboard 
+                report={report} 
+                loading={loading} 
+                error={error || undefined}
+              />
+            )}
+          </Container>
+        </Box>
+
+        <Footer />
       </Box>
 
       <Snackbar

@@ -1,0 +1,162 @@
+{
+  "domain": "gene.com",
+  "records": [
+    {
+      "domain": "gene.com",
+      "selector": "k3",
+      "rawRecord": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsYGiMSn7fsUqSvfSX40x9R1OlRtbNiCY80lHRIlcKx3XDIR7257aUx+q9CSIARdfTL6KCuLGNFx5g9TgVr6png4ajcieSQGtOehBgxnkDN8aAA5TX0FmFrcefJU0JoxLOF09EKgXxhSSHCk/ekVb0PXSboHXoZ9+EI404F1qhcwXXIgHXTaUthHTut2P6BBZhIXIgvDe/w49GchR7MRJqjNb7neEBbYHbgWuBTvvHCg7Gy6m6n9krYK+ROWq3dVvXy9plAGK3ygM+HtjIiMt7arRGMOF0WgDTz7YdN9BGpt6BvXxLnjiQcgS5T9n+cIyPZgiWzDMXNlaEEdKTEKxrwIDAQAB;",
+      "parsedData": {
+        "version": "DKIM1",
+        "algorithm": "",
+        "keyType": "rsa",
+        "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsYGiMSn7fsUqSvfSX40x9R1OlRtbNiCY80lHRIlcKx3XDIR7257aUx+q9CSIARdfTL6KCuLGNFx5g9TgVr6png4ajcieSQGtOehBgxnkDN8aAA5TX0FmFrcefJU0JoxLOF09EKgXxhSSHCk/ekVb0PXSboHXoZ9+EI404F1qhcwXXIgHXTaUthHTut2P6BBZhIXIgvDe/w49GchR7MRJqjNb7neEBbYHbgWuBTvvHCg7Gy6m6n9krYK+ROWq3dVvXy9plAGK3ygM+HtjIiMt7arRGMOF0WgDTz7YdN9BGpt6BvXxLnjiQcgS5T9n+cIyPZgiWzDMXNlaEEdKTEKxrwIDAQAB"
+      },
+      "retrievedAt": "2025-07-09T01:38:54.888Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "s2",
+      "rawRecord": "k=rsa; t=s; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCu3jOWkldvK37Pz4Pg295GQfvKYNFVExS9wpKfl9Dxondc4nXI65MibbOVqk2p5k9eJfHqnbANgs16KhSfqWRK7dEOuH0QdsLjB/2b73Zm+ZKlbHUJujtKBM5Y8dPtVnKi0CVQTQFrmoX2zzWxh5HpsJ1SvpYEtY74tVBgbYKrzwIDAQAB",
+      "parsedData": {
+        "version": "",
+        "algorithm": "",
+        "keyType": "rsa",
+        "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCu3jOWkldvK37Pz4Pg295GQfvKYNFVExS9wpKfl9Dxondc4nXI65MibbOVqk2p5k9eJfHqnbANgs16KhSfqWRK7dEOuH0QdsLjB/2b73Zm+ZKlbHUJujtKBM5Y8dPtVnKi0CVQTQFrmoX2zzWxh5HpsJ1SvpYEtY74tVBgbYKrzwIDAQAB",
+        "flags": ["s"]
+      },
+      "retrievedAt": "2025-07-09T01:38:54.892Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "zendesk1",
+      "rawRecord": "v=DKIM1;t=s;n=core;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9IqdLrO3Zr2/56MHt8oQVCQorP0Bl2Fz9sM2tFBnJCdB/HogQmuudEg2xAovCN2PYpw44UijIvPuBoT9vxiv6ZCBJTLJXa82r6ke5rE4tbe9\" \"NKFIrVIb9S306cJDrnKFMDb8p0dU/Su0+eUR5gVAOtCuz2L8HAzs5edvsEvD/Fb4ny1RLNSEPZkIQLfGhVxQeWANm3+1Jwb/OBVXV9k0nKpWrpgqcmO7NzroJirp014RQY7rGi60JLUubc6XhvoFQBQrtOAdVlZC5wvfS1bgpq5kQpdP7cajIqWCeqxPTeo0ZUpey2ZcaygEsZz0Z3Gs5wDzyuqd7/ADpr2jNF7ozwIDAQAB",
+      "parsedData": {
+        "version": "DKIM1",
+        "algorithm": "",
+        "keyType": "",
+        "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9IqdLrO3Zr2/56MHt8oQVCQorP0Bl2Fz9sM2tFBnJCdB/HogQmuudEg2xAovCN2PYpw44UijIvPuBoT9vxiv6ZCBJTLJXa82r6ke5rE4tbe9\" \"NKFIrVIb9S306cJDrnKFMDb8p0dU/Su0+eUR5gVAOtCuz2L8HAzs5edvsEvD/Fb4ny1RLNSEPZkIQLfGhVxQeWANm3+1Jwb/OBVXV9k0nKpWrpgqcmO7NzroJirp014RQY7rGi60JLUubc6XhvoFQBQrtOAdVlZC5wvfS1bgpq5kQpdP7cajIqWCeqxPTeo0ZUpey2ZcaygEsZz0Z3Gs5wDzyuqd7/ADpr2jNF7ozwIDAQAB",
+        "flags": ["s"],
+        "notes": "core"
+      },
+      "retrievedAt": "2025-07-09T01:38:54.912Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "k1",
+      "rawRecord": "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDbNrX2cY/GUKIFx2G/1I00ftdAj713WP9AQ1xir85i89sA2guU0ta4UX1Xzm06XIU6iBP41VwmPwBGRNofhBVR+e6WHUoNyIR4Bn84LVcfZE20rmDeXQblIupNWBqLXM1Q+VieI/eZu/7k9/vOkLSaQQdml4Cv8lb3PcnluMVIhQIDAQAB;",
+      "parsedData": {
+        "version": "",
+        "algorithm": "",
+        "keyType": "rsa",
+        "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDbNrX2cY/GUKIFx2G/1I00ftdAj713WP9AQ1xir85i89sA2guU0ta4UX1Xzm06XIU6iBP41VwmPwBGRNofhBVR+e6WHUoNyIR4Bn84LVcfZE20rmDeXQblIupNWBqLXM1Q+VieI/eZu/7k9/vOkLSaQQdml4Cv8lb3PcnluMVIhQIDAQAB"
+      },
+      "retrievedAt": "2025-07-09T01:38:54.939Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "qualtrics",
+      "rawRecord": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgG9jEtedurr457C8wNnd5Zr1mof5QqpAKY/Kj5FcbRfEQ6H+eOqAqdlQZhnSFT4pMwjaA6IlO62XK+Lxuw5VE173MRoNjYiruQfVVVxQtKB5wpsfd69JhNtuhqLnmZl6FxjAUqMmiFwTU7sJqaK89N8oWP7m2ljs+axbIaXjKT+3GrmQ3UYNnmxWYHY4yAoXe\" \"b4sKCLgUWaxW8jn6V32vFGO3R3HzhLfWrmFe7DjDZg6EyorOJwyBRam+8w3vJrR8dfk1yCLUtUzhhFBflLzaVOqWK7KPIPTiKTzmd2Kv6gSmK1C5iiMijuESlZZPmfdRj5AtgTgQ+waNiw7hIZmCQIDAQAB",
+      "parsedData": {
+        "version": "DKIM1",
+        "algorithm": "",
+        "keyType": "rsa",
+        "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgG9jEtedurr457C8wNnd5Zr1mof5QqpAKY/Kj5FcbRfEQ6H+eOqAqdlQZhnSFT4pMwjaA6IlO62XK+Lxuw5VE173MRoNjYiruQfVVVxQtKB5wpsfd69JhNtuhqLnmZl6FxjAUqMmiFwTU7sJqaK89N8oWP7m2ljs+axbIaXjKT+3GrmQ3UYNnmxWYHY4yAoXe\" \"b4sKCLgUWaxW8jn6V32vFGO3R3HzhLfWrmFe7DjDZg6EyorOJwyBRam+8w3vJrR8dfk1yCLUtUzhhFBflLzaVOqWK7KPIPTiKTzmd2Kv6gSmK1C5iiMijuESlZZPmfdRj5AtgTgQ+waNiw7hIZmCQIDAQAB"
+      },
+      "retrievedAt": "2025-07-09T01:38:54.939Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "mandrill",
+      "rawRecord": "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrLHiExVd55zd/IQ/J/mRwSRMAocV/hMB3jXwaHH36d9NaVynQFYV8NaWi69c1veUtRzGt7yAioXqLj7Z4TeEUoOLgrKsn8YnckGs9i3B3tVFB+Ch/4mPhXWiNfNdynHWBcPcbJ8kjEQ2U8y78dHZj1YeRXXVvWob2OaKynO8/lQIDAQAB",
+      "parsedData": {
+        "version": "DKIM1",
+        "algorithm": "",
+        "keyType": "rsa",
+        "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrLHiExVd55zd/IQ/J/mRwSRMAocV/hMB3jXwaHH36d9NaVynQFYV8NaWi69c1veUtRzGt7yAioXqLj7Z4TeEUoOLgrKsn8YnckGs9i3B3tVFB+Ch/4mPhXWiNfNdynHWBcPcbJ8kjEQ2U8y78dHZj1YeRXXVvWob2OaKynO8/lQIDAQAB"
+      },
+      "retrievedAt": "2025-07-09T01:38:54.939Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "k2",
+      "rawRecord": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv2aC2KjGKLOwTweBY5A9RpjsxaBXR9r7OAU6U8/zn92ivImI75naUujWbItRI/QmL1jy5PWGqLwoUA0b90ObWaLDc+i9MtTNmGeWO009hr20fIxhGg6XBT2kjZ1DTThopSe1nAndsupmcBwlQ5Q6LJ+ZAxLcujnPIxM0ZBLmgpkv8u6RfY4eFP8OLvdAW3oSu\" \"B0DyLDigQX4Sj8wBO4YIdQH6AAmBeOsidsKAFNFUCpc3vCxtBDR12U+cBg724l3sBkMQ8evnz6idnqxq9QAVYh8k4kJ+RP+6cqTdy7LjIm8xY/bQNpQIpGUAuDo2DjLcCDun9DAI4Q/3z+Q0o9QuQIDAQAB;",
+      "parsedData": {
+        "version": "DKIM1",
+        "algorithm": "",
+        "keyType": "rsa",
+        "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv2aC2KjGKLOwTweBY5A9RpjsxaBXR9r7OAU6U8/zn92ivImI75naUujWbItRI/QmL1jy5PWGqLwoUA0b90ObWaLDc+i9MtTNmGeWO009hr20fIxhGg6XBT2kjZ1DTThopSe1nAndsupmcBwlQ5Q6LJ+ZAxLcujnPIxM0ZBLmgpkv8u6RfY4eFP8OLvdAW3oSu\" \"B0DyLDigQX4Sj8wBO4YIdQH6AAmBeOsidsKAFNFUCpc3vCxtBDR12U+cBg724l3sBkMQ8evnz6idnqxq9QAVYh8k4kJ+RP+6cqTdy7LjIm8xY/bQNpQIpGUAuDo2DjLcCDun9DAI4Q/3z+Q0o9QuQIDAQAB"
+      },
+      "retrievedAt": "2025-07-09T01:38:54.952Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "s1",
+      "rawRecord": "k=rsa; t=s; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoSfVEgXUbacNuQL8nyexi6E1iCFdbHIMHsgglRcoUK15qNxa7Spwz46G8GjVaMc8dXYo4fb3Bdcnsnn0akaLq8hT/Hfqj0qLh8F7/qe+8/wLSqgGGnb6qu6Uao9g2lgMiNOBirwY8Bw/hqVF0TaX9F+ZDV80vJN5CJ3bQsV9n6nbPv8RO42bX5PEk2aCzkO82UrvP\" \"oP58F45A1OcPxridPOp3ONRZW7B4GnWAkvbj9ML9ku/HiPql5+vFJNxEa74Pb6yMliTqMWc9kfCe/M3/uMElWvub4wyBiqnVKeWc32gCTjK+eb5gedJDqEqwN7fgDY7kB+ZgXw/gM3fsGbfWwIDAQAB",
+      "parsedData": {
+        "version": "",
+        "algorithm": "",
+        "keyType": "rsa",
+        "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoSfVEgXUbacNuQL8nyexi6E1iCFdbHIMHsgglRcoUK15qNxa7Spwz46G8GjVaMc8dXYo4fb3Bdcnsnn0akaLq8hT/Hfqj0qLh8F7/qe+8/wLSqgGGnb6qu6Uao9g2lgMiNOBirwY8Bw/hqVF0TaX9F+ZDV80vJN5CJ3bQsV9n6nbPv8RO42bX5PEk2aCzkO82UrvP\" \"oP58F45A1OcPxridPOp3ONRZW7B4GnWAkvbj9ML9ku/HiPql5+vFJNxEa74Pb6yMliTqMWc9kfCe/M3/uMElWvub4wyBiqnVKeWc32gCTjK+eb5gedJDqEqwN7fgDY7kB+ZgXw/gM3fsGbfWwIDAQAB",
+        "flags": ["s"]
+      },
+      "retrievedAt": "2025-07-09T01:38:54.968Z"
+    },
+    {
+      "domain": "gene.com",
+      "selector": "zendesk2",
+      "rawRecord": "v=DKIM1; t=s; n=core; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA502TKGMdWHrs7mbG4655R5Nt4hJPV47dnkDszCvU2AkSvEy1lxBaxJb+WNxwHrOyBhfXuDYyryVQkzHXbg20zMVc1LNab+vuW0fI1QrbKbTjbfE5zCD/VRk/neXRk\" \"oW4X+WvtWXstIJqExUmQY4IDKMP7F1Bga+M5zps5omEyYn7SxgIixV/sR6nIEs3lSvzF2Pfi1xDsC8G4xVkpJ9bqobYreUkibYVQhqj8f/gCkyhNABzooqIwgdJf8BaSMZD6VSMIhi/OUT83bqyn6ZVUaquWXIU5FYGeqhj3l4XHogwTx5C1aaZG3QQ1nr7RxdrQXyuIYefUJkeFkaNr/OM3QIDAQAB",
+      "parsedData": {
+        "version": "DKIM1",
+        "algorithm": "",
+        "keyType": "",
+        "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA502TKGMdWHrs7mbG4655R5Nt4hJPV47dnkDszCvU2AkSvEy1lxBaxJb+WNxwHrOyBhfXuDYyryVQkzHXbg20zMVc1LNab+vuW0fI1QrbKbTjbfE5zCD/VRk/neXRk\" \"oW4X+WvtWXstIJqExUmQY4IDKMP7F1Bga+M5zps5omEyYn7SxgIixV/sR6nIEs3lSvzF2Pfi1xDsC8G4xVkpJ9bqobYreUkibYVQhqj8f/gCkyhNABzooqIwgdJf8BaSMZD6VSMIhi/OUT83bqyn6ZVUaquWXIU5FYGeqhj3l4XHogwTx5C1aaZG3QQ1nr7RxdrQXyuIYefUJkeFkaNr/OM3QIDAQAB",
+        "flags": ["s"],
+        "notes": "core"
+      },
+      "retrievedAt": "2025-07-09T01:38:54.971Z"
+    }
+  ],
+  "retrievedAt": "2025-07-09T01:38:54.971Z",
+  "score": {
+    "totalScore": 20,
+    "maxPossibleScore": 20,
+    "percentage": 100,
+    "scoreItems": [
+      {
+        "name": "DKIM Implemented",
+        "description": "At least one DKIM public key record is published for the domain.",
+        "score": 10,
+        "maxScore": 10,
+        "passed": true,
+        "details": "Found 9 DKIM record(s)"
+      },
+      {
+        "name": "DKIM Key Length",
+        "description": "Strength of DKIM keys in DNS: 2048-bit (or higher): 5 points. 1024-bit: 3 points. <1024-bit: 0.",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "k3: 2048 bits, s2: 1024 bits, zendesk1: 2048 bits, k1: 1024 bits, qualtrics: 2048 bits, mandrill: 1024 bits, k2: 2048 bits, s1: 2048 bits, zendesk2: 2048 bits"
+      },
+      {
+        "name": "DKIM Multiple Selectors",
+        "description": "Domain has at least two DKIM selectors/keys set up (facilitates key rotation).",
+        "score": 3,
+        "maxScore": 3,
+        "passed": true,
+        "details": "Selectors: k3, s2, zendesk1, k1, qualtrics, mandrill, k2, s1, zendesk2"
+      },
+      {
+        "name": "No DKIM Test Mode",
+        "description": "DKIM DNS records are in normal mode (no t=y flags set, indicating no lingering test-mode).",
+        "score": 2,
+        "maxScore": 2,
+        "passed": true,
+        "details": "No test mode flags found"
+      }
+    ]
+  },
+  "requestId": "43fb8d60-b433-4b31-b7ec-90395379a417",
+  "responseTime": 616,
+  "timestamp": "2025-07-09T01:38:54.972Z"
+}

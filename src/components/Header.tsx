@@ -20,7 +20,7 @@ import {
 import { useState } from 'react';
 
 interface HeaderProps {
-  onNavigate?: (page: 'main' | 'spf') => void;
+  onNavigate?: (page: 'main' | 'spf' | 'dkim') => void;
 }
 
 export const Header = ({ onNavigate }: HeaderProps) => {
@@ -39,6 +39,8 @@ export const Header = ({ onNavigate }: HeaderProps) => {
     if (onNavigate) {
       if (tool === 'spf') {
         onNavigate('spf');
+      } else if (tool === 'dkim') {
+        onNavigate('dkim');
       } else if (tool === 'main') {
         onNavigate('main');
       }

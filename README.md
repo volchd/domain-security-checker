@@ -16,6 +16,13 @@ A comprehensive web application for analyzing domain security and email authenti
 - **Validation Results**: Check syntax, record count, and security best practices
 - **Scoring System**: Get detailed scoring for SPF configuration with specific recommendations
 
+### DKIM Record Checker
+- **Comprehensive DKIM Analysis**: Detailed analysis of DKIM (DomainKeys Identified Mail) records
+- **Multiple Selector Support**: View all DKIM selectors and their configurations
+- **Key Strength Analysis**: Analyze public key lengths and security strength
+- **Detailed Record Breakdown**: Expandable sections showing raw records and parsed data
+- **Security Scoring**: Get detailed scoring for DKIM configuration with specific recommendations
+
 ## Getting Started
 
 ### Prerequisites
@@ -59,12 +66,24 @@ npm run dev
    - Security scoring
    - Recommendations
 
+### DKIM Record Checker
+1. Click on "Free Tools" in the header
+2. Select "DKIM Checker" from the dropdown menu
+3. Enter a domain name to analyze its DKIM records
+4. View detailed analysis including:
+   - DKIM record summary
+   - Security score breakdown
+   - Individual selector analysis
+   - Raw record details
+   - Public key information
+
 ## API Endpoints
 
 The application uses the following API endpoints:
 
 - `GET /api/score?domain=<domain>` - Get comprehensive security analysis
 - `GET /api/spf?domain=<domain>` - Get detailed SPF analysis
+- `GET /api/dkim?domain=<domain>` - Get detailed DKIM analysis
 
 ## Technology Stack
 
@@ -84,11 +103,13 @@ src/
 │   ├── SecurityDashboard.tsx    # Main security dashboard
 │   ├── SecurityCard.tsx         # Individual security protocol cards
 │   ├── SpfChecker.tsx           # SPF-specific analysis page
+│   ├── DkimChecker.tsx          # DKIM-specific analysis page
 │   ├── Header.tsx               # Application header with navigation
 │   └── Footer.tsx               # Application footer
 ├── types/
 │   ├── security.ts              # Main security types
-│   └── spf.ts                   # SPF-specific types
+│   ├── spf.ts                   # SPF-specific types
+│   └── dkim.ts                  # DKIM-specific types
 ├── assets/                      # Static assets
 ├── App.tsx                      # Main application component
 └── main.tsx                     # Application entry point

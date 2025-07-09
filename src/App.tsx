@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { DomainInput } from './components/DomainInput';
 import { SecurityDashboard } from './components/SecurityDashboard';
+import { SpfChecker } from './components/SpfChecker';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import type { SecurityReport } from './types/security';
@@ -68,6 +69,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<SecurityReport | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<'main' | 'spf'>('main');
 
   const handleSearch = async (domain: string) => {
     setLoading(true);
@@ -91,6 +93,12 @@ function App() {
     }
   };
 
+  const handleNavigation = (page: 'main' | 'spf') => {
+    setCurrentPage(page);
+    setReport(null);
+    setError(null);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -102,20 +110,24 @@ function App() {
           background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
         }}
       >
-        <Header />
+        <Header onNavigate={handleNavigation} />
         
         <Box sx={{ flex: 1, py: 4 }}>
-          <Container maxWidth="lg">
-            <DomainInput onSearch={handleSearch} loading={loading} />
-            
-            {report && (
-              <SecurityDashboard 
-                report={report} 
-                loading={loading} 
-                error={error || undefined}
-              />
-            )}
-          </Container>
+          {currentPage === 'main' ? (
+            <Container maxWidth="lg">
+              <DomainInput onSearch={handleSearch} loading={loading} />
+              
+              {report && (
+                <SecurityDashboard 
+                  report={report} 
+                  loading={loading} 
+                  error={error || undefined}
+                />
+              )}
+            </Container>
+          ) : (
+            <SpfChecker onBack={() => handleNavigation('main')} />
+          )}
         </Box>
 
         <Footer />

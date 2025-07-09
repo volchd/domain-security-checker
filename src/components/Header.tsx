@@ -19,7 +19,11 @@ import {
 } from '@mui/icons-material';
 import { useState } from 'react';
 
-export const Header = () => {
+interface HeaderProps {
+  onNavigate?: (page: 'main' | 'spf') => void;
+}
+
+export const Header = ({ onNavigate }: HeaderProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -32,8 +36,13 @@ export const Header = () => {
   };
 
   const handleToolSelect = (tool: string) => {
-    console.log(`Selected tool: ${tool}`);
-    // TODO: Implement navigation or tool switching logic
+    if (onNavigate) {
+      if (tool === 'spf') {
+        onNavigate('spf');
+      } else if (tool === 'main') {
+        onNavigate('main');
+      }
+    }
     handleClose();
   };
 
@@ -50,7 +59,10 @@ export const Header = () => {
     >
       <Container maxWidth="lg">
         <Toolbar sx={{ px: { xs: 0 }, justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Box 
+            sx={{ display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer' }}
+            onClick={() => onNavigate?.('main')}
+          >
             <Security 
               sx={{ 
                 color: '#667eea',

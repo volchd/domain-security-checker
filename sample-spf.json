@@ -1,0 +1,101 @@
+{
+  "domain": "gene.com",
+  "spfRecords": [
+    {
+      "domain": "gene.com",
+      "spfRecord": "v=spf1 redirect=gene.com.hosted.spf-report.com",
+      "type": "initial"
+    },
+    {
+      "domain": "gene.com.hosted.spf-report.com",
+      "spfRecord": "v=spf1 include:gene_com_5cc89cf3_0.flat.spf-report.com -all",
+      "type": "redirect"
+    },
+    {
+      "domain": "gene_com_5cc89cf3_0.flat.spf-report.com",
+      "spfRecord": "v=spf1 ip4:170.224.5.38 ip4:52.177.10.182 ip4:52.177.19.91 ip4:128.137.10.31 ip4:128.137.10.32 ip4:128.137.12.8 ip4:128.137.12.9 ip4:198.21.20.189 ip4:198.21.20.190 ip4:198.21.20.184 ip4:198.21.20.185 ip4:198.21.25.77 ip4:198.21.25.78 ip4:192.12.78.21 ip4:192.12.78.22 ip4:52.236.149.94 ip4:51.138.12.125 ip4:51.138.101.68 ip4:51.124.144.146 ip4:20.50.154.158 ip4:128.137.12.10 ip4:128.137.16.10 ip4:198.21.20.186 ip4:198.21.20.187 ip4:198.21.20.191 ip4:198.21.20.192 ip4:192.12.78.23 ip4:192.12.78.24 ip4:198.21.25.79 ip4:198.21.25.80 ip4:198.21.20.231 ip4:198.21.20.232 ip4:198.21.20.235 ip4:198.21.20.236 ip4:192.12.78.10 ip4:192.12.78.11 ip4:198.21.25.6 ip4:198.21.25.7 ip4:50.31.156.96/27 ip4:104.245.209.192/26 ip4:50.31.205.0/24 ip4:147.160.158.0/24 ip4:66.249.80.0/20 ip4:72.14.192.0/18 ip4:74.125.0.0/16 ip4:108.177.8.0/21 ip4:173.194.0.0/16 ip4:209.85.128.0/17 ip4:216.58.192.0/19 ip4:216.239.32.0/19 ip6:2001:4860:4000::/36 ip6:2404:6800:4000::/36 ip6:2607:f8b0:4000::/36 ip6:2800:3f0:4000::/36 ip6:2a00:1450:4000::/36 include:gene_com_5cc89cf3_1.flat.spf-report.com -all",
+      "type": "include"
+    },
+    {
+      "domain": "gene_com_5cc89cf3_1.flat.spf-report.com",
+      "spfRecord": "v=spf1 ip6:2c0f:fb50:4000::/36 ip4:172.217.0.0/19 ip4:172.217.32.0/20 ip4:172.217.128.0/19 ip4:172.217.160.0/20 ip4:172.217.192.0/19 ip4:172.253.56.0/21 ip4:172.253.112.0/20 ip4:108.177.96.0/19 ip4:198.2.128.0/24 ip4:198.2.132.0/22 ip4:198.2.136.0/23 ip4:198.2.145.0/24 ip4:198.2.186.0/23 ip4:205.201.131.128/25 ip4:205.201.134.128/25 ip4:205.201.136.0/23 ip4:205.201.139.0/24 ip4:198.2.177.0/24 ip4:198.2.178.0/23 ip4:198.2.180.0/24 ip4:5.61.117.96/29 ip4:199.255.192.0/22 ip4:199.127.232.0/22 ip4:54.240.0.0/18 ip4:69.169.224.0/20 ip4:23.249.208.0/20 ip4:23.251.224.0/19 ip4:76.223.176.0/20 ip4:54.240.64.0/18 ip4:76.223.128.0/19 ip4:216.221.160.0/19 ip4:206.55.144.0/20 ip4:24.110.64.0/18 -all",
+      "type": "include"
+    }
+  ],
+  "validationResults": {
+    "hasSpfRecord": { "isValid": true },
+    "syntaxValidation": { "isValid": true, "errors": [] },
+    "oneInitialSpfRecord": { "isValid": true },
+    "maxTenSpfRecords": { "isValid": true },
+    "deprecatedMechanisms": { "isValid": true, "errors": [] },
+    "unsafeAllMechanism": { "isValid": true, "errors": [] },
+    "firstAllQualifier": { "qualifier": "-" }
+  },
+  "scoringResults": {
+    "totalScore": 40,
+    "maxPossibleScore": 40,
+    "percentage": 100,
+    "grade": "A",
+    "scoreItems": [
+      {
+        "name": "SPF Record Present",
+        "description": "SPF TXT record exists on the domain (with correct v=spf1). If missing, domain is unprotected by SPF.",
+        "score": 10,
+        "maxScore": 10,
+        "passed": true,
+        "details": "SPF record found"
+      },
+      {
+        "name": "Single SPF Record",
+        "description": "Only one SPF record is published (no duplicates). Multiple records cause SPF failure.",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "Single SPF record found"
+      },
+      {
+        "name": "SPF Syntax Valid",
+        "description": "SPF record is syntactically correct (no obvious errors, unrecognized mechanisms, or syntax violations).",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "Syntax validation passed"
+      },
+      {
+        "name": "Authorized Sources ≤ 10 Lookups",
+        "description": "SPF includes/redirects do not exceed 10 DNS lookups. (Staying within RFC limit avoids permerror.)",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "DNS lookups within limit"
+      },
+      {
+        "name": "No \"Pass All\" Mechanism",
+        "description": "SPF does not use +all which would allow any sender.",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "No unsafe +all mechanism found"
+      },
+      {
+        "name": "All Mechanism Policy",
+        "description": "SPF uses an appropriate policy on \"all\": -all (hard fail) configured: 5 points (strict enforcement). ~all (soft fail): 3 points (partial credit, more relaxed). ?all or no all: 0 (neutral or missing policy is poor).",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "Hard fail (-all) configured: strict enforcement"
+      },
+      {
+        "name": "No Deprecated Mechanisms",
+        "description": "SPF record does not use deprecated mechanisms like ptr. (If none, give 2 points; if present, 0.)",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "No deprecated mechanisms found"
+      }
+    ]
+  },
+  "requestId": "42662239-3b32-4251-bf20-2b8c3ef21e31",
+  "responseTime": 569,
+  "timestamp": "2025-07-09T01:23:40.179Z"
+}

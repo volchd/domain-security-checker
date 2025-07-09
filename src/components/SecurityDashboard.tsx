@@ -130,24 +130,50 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
           </Box>
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
           <Chip
-            icon={<Security />}
+            icon={<Security sx={{ fontSize: 32 }} />}
             label={`SPF: ${report.scores.spf.percentage}%`}
             variant="outlined"
-            sx={{ borderColor: '#2196f3', color: '#2196f3' }}
+            sx={{
+              borderColor: '#2196f3',
+              color: '#2196f3',
+              height: 60,
+              fontSize: '1.5rem',
+              '.MuiChip-icon': { fontSize: 32 }
+            }}
           />
           <Chip
-            icon={<Email />}
+            icon={<Email sx={{ fontSize: 32 }} />}
             label={`DKIM: ${report.scores.dkim.percentage}%`}
             variant="outlined"
-            sx={{ borderColor: '#4caf50', color: '#4caf50' }}
+            sx={{
+              borderColor: '#4caf50',
+              color: '#4caf50',
+              height: 60,
+              fontSize: '1.5rem',
+              '.MuiChip-icon': { fontSize: 32 }
+            }}
           />
           <Chip
-            icon={<VerifiedUser />}
+            icon={<VerifiedUser sx={{ fontSize: 32 }} />}
             label={`DMARC: ${report.scores.dmarc.percentage}%`}
             variant="outlined"
-            sx={{ borderColor: '#ff9800', color: '#ff9800' }}
+            sx={{
+              borderColor: '#ff9800',
+              color: '#ff9800',
+              height: 60,
+              fontSize: '1.5rem',
+              '.MuiChip-icon': { fontSize: 32 }
+            }}
           />
         </Box>
       </MotionPaper>

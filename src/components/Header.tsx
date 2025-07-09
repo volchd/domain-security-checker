@@ -1,7 +1,42 @@
-import { AppBar, Toolbar, Typography, Box, Container } from '@mui/material';
-import { Security } from '@mui/icons-material';
+import { 
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  Box, 
+  Container,
+  Button,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText
+} from '@mui/material';
+import { 
+  Security,
+  ExpandMore,
+  Email,
+  VerifiedUser,
+  Shield
+} from '@mui/icons-material';
+import { useState } from 'react';
 
 export const Header = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleToolSelect = (tool: string) => {
+    console.log(`Selected tool: ${tool}`);
+    // TODO: Implement navigation or tool switching logic
+    handleClose();
+  };
+
   return (
     <AppBar 
       position="static" 
@@ -14,7 +49,7 @@ export const Header = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar sx={{ px: { xs: 0 } }}>
+        <Toolbar sx={{ px: { xs: 0 }, justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Security 
               sx={{ 
@@ -45,6 +80,75 @@ export const Header = () => {
                 Analyze domain security and compliance
               </Typography>
             </Box>
+          </Box>
+
+          {/* Free Tools Dropdown */}
+          <Box>
+            <Button
+              id="free-tools-button"
+              aria-controls={open ? 'free-tools-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+              endIcon={<ExpandMore />}
+              sx={{
+                color: '#1a202c',
+                textTransform: 'none',
+                fontWeight: 600,
+                fontSize: '1rem',
+                '&:hover': {
+                  backgroundColor: 'rgba(102, 126, 234, 0.08)'
+                }
+              }}
+            >
+              Free Tools
+            </Button>
+            <Menu
+              id="free-tools-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'free-tools-button',
+              }}
+              PaperProps={{
+                sx: {
+                  mt: 1,
+                  minWidth: 200,
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                  borderRadius: 2,
+                  border: '1px solid rgba(0, 0, 0, 0.06)'
+                }
+              }}
+            >
+              <MenuItem onClick={() => handleToolSelect('spf')}>
+                <ListItemIcon>
+                  <Shield sx={{ color: '#2196f3' }} />
+                </ListItemIcon>
+                <ListItemText 
+                  primary="SPF Checker"
+                  secondary="Check SPF record configuration"
+                />
+              </MenuItem>
+              <MenuItem onClick={() => handleToolSelect('dkim')}>
+                <ListItemIcon>
+                  <Email sx={{ color: '#4caf50' }} />
+                </ListItemIcon>
+                <ListItemText 
+                  primary="DKIM Checker"
+                  secondary="Verify DKIM authentication"
+                />
+              </MenuItem>
+              <MenuItem onClick={() => handleToolSelect('dmarc')}>
+                <ListItemIcon>
+                  <VerifiedUser sx={{ color: '#ff9800' }} />
+                </ListItemIcon>
+                <ListItemText 
+                  primary="DMARC Checker"
+                  secondary="Analyze DMARC policy"
+                />
+              </MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </Container>

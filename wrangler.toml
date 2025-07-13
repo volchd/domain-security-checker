@@ -1,0 +1,5 @@
+name = "domain-security-checker"
+compatibility_date = "2025-07-08"
+
+[build]
+command = "npm run build" 

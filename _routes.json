@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/api/*",
+    "/_routes.json",
+    "/_worker.js",
+    "/_headers",
+    "/_redirects"
+  ]
+} 

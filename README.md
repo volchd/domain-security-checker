@@ -93,6 +93,48 @@ The application uses the following API endpoints:
 - **Styling**: Emotion (via MUI)
 - **Icons**: Material-UI Icons
 - **Animations**: Framer Motion
+- **Deployment**: Cloudflare Pages
+
+## Deployment
+
+### Cloudflare Pages
+
+This project is configured for deployment on Cloudflare Pages.
+
+#### Prerequisites
+- Cloudflare account
+- Wrangler CLI installed (`npm install -g wrangler`)
+
+#### Environment Variables
+Create a `.env` file with your backend API URL:
+```bash
+VITE_API_HOST=https://your-backend-worker.your-subdomain.workers.dev
+```
+
+#### Deployment Steps
+
+1. **Build the project**:
+   ```bash
+   npm run build
+   ```
+
+2. **Deploy to Pages**:
+   ```bash
+   npm run deploy
+   ```
+
+#### Alternative: GitHub Integration
+1. Connect your GitHub repository to Cloudflare Pages
+2. Set build settings:
+   - Build command: `npm run build`
+   - Build output directory: `dist`
+   - Environment variables: Add `VITE_API_HOST` with your backend Worker URL
+
+#### API Configuration
+Update the `VITE_API_HOST` environment variable to point to your separate backend Worker that handles the API endpoints:
+- `GET /api/score?domain=<domain>` - Get comprehensive security analysis
+- `GET /api/spf?domain=<domain>` - Get detailed SPF analysis
+- `GET /api/dkim?domain=<domain>` - Get detailed DKIM analysis
 
 ## Project Structure
 

@@ -31,8 +31,8 @@ import {
 } from '@mui/icons-material';
 import type { SpfReport } from '../types/spf';
 
-// API configuration
-const API_HOST = import.meta.env.VITE_API_HOST || 'http://localhost:8787';
+// API configuration - update this to point to your separate backend Worker
+const API_HOST = import.meta.env.VITE_API_HOST || 'https://your-backend-worker.your-subdomain.workers.dev';
 
 interface SpfCheckerProps {
   onBack?: () => void;

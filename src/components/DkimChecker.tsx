@@ -28,6 +28,7 @@ import {
   Key,
   Security,
   Info,
+  Domain,
 } from '@mui/icons-material';
 import type { DkimReport } from '../types/dkim';
 
@@ -221,8 +222,8 @@ export function DkimChecker({ onBack }: DkimCheckerProps) {
             </CardContent>
           </Card>
 
-          {/* DKIM Records */}
-          <Card>
+          {/* DKIM Records Analysis */}
+          <Card sx={{ mb: 4 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 DKIM Records Analysis
@@ -287,64 +288,64 @@ export function DkimChecker({ onBack }: DkimCheckerProps) {
                         </Paper>
                       </Box>
                       
-                                             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
-                         <Box sx={{ flex: 1 }}>
-                           <Typography variant="subtitle2" gutterBottom>
-                             Parsed Data:
-                           </Typography>
-                           <List dense>
-                             <ListItem>
-                               <ListItemIcon><Info fontSize="small" /></ListItemIcon>
-                               <ListItemText
-                                 primary="Version"
-                                 secondary={record.parsedData.version || 'Not specified'}
-                               />
-                             </ListItem>
-                             <ListItem>
-                               <ListItemIcon><Security fontSize="small" /></ListItemIcon>
-                               <ListItemText
-                                 primary="Algorithm"
-                                 secondary={record.parsedData.algorithm || 'Not specified'}
-                               />
-                             </ListItem>
-                             <ListItem>
-                               <ListItemIcon><Key fontSize="small" /></ListItemIcon>
-                               <ListItemText
-                                 primary="Key Type"
-                                 secondary={record.parsedData.keyType || 'Not specified'}
-                               />
-                             </ListItem>
-                             {record.parsedData.flags && record.parsedData.flags.length > 0 && (
-                               <ListItem>
-                                 <ListItemIcon><Info fontSize="small" /></ListItemIcon>
-                                 <ListItemText
-                                   primary="Flags"
-                                   secondary={record.parsedData.flags.join(', ')}
-                                 />
-                               </ListItem>
-                             )}
-                             {record.parsedData.notes && (
-                               <ListItem>
-                                 <ListItemIcon><Info fontSize="small" /></ListItemIcon>
-                                 <ListItemText
-                                   primary="Notes"
-                                   secondary={record.parsedData.notes}
-                                 />
-                               </ListItem>
-                             )}
-                           </List>
-                         </Box>
-                         <Box sx={{ flex: 1 }}>
-                           <Typography variant="subtitle2" gutterBottom>
-                             Public Key:
-                           </Typography>
-                           <Paper sx={{ p: 2, bgcolor: 'grey.50', maxHeight: 200, overflow: 'auto' }}>
-                             <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: '0.75rem', wordBreak: 'break-all' }}>
-                               {record.parsedData.publicKey}
-                             </Typography>
-                           </Paper>
-                         </Box>
-                       </Box>
+                      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
+                        <Box sx={{ flex: 1 }}>
+                          <Typography variant="subtitle2" gutterBottom>
+                            Parsed Data:
+                          </Typography>
+                          <List dense>
+                            <ListItem>
+                              <ListItemIcon><Info fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Version"
+                                secondary={record.parsedData.version || 'Not specified'}
+                              />
+                            </ListItem>
+                            <ListItem>
+                              <ListItemIcon><Security fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Algorithm"
+                                secondary={record.parsedData.algorithm || 'Not specified'}
+                              />
+                            </ListItem>
+                            <ListItem>
+                              <ListItemIcon><Key fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Key Type"
+                                secondary={record.parsedData.keyType || 'Not specified'}
+                              />
+                            </ListItem>
+                            {record.parsedData.flags && record.parsedData.flags.length > 0 && (
+                              <ListItem>
+                                <ListItemIcon><Info fontSize="small" /></ListItemIcon>
+                                <ListItemText
+                                  primary="Flags"
+                                  secondary={record.parsedData.flags.join(', ')}
+                                />
+                              </ListItem>
+                            )}
+                            {record.parsedData.notes && (
+                              <ListItem>
+                                <ListItemIcon><Info fontSize="small" /></ListItemIcon>
+                                <ListItemText
+                                  primary="Notes"
+                                  secondary={record.parsedData.notes}
+                                />
+                              </ListItem>
+                            )}
+                          </List>
+                        </Box>
+                        <Box sx={{ flex: 1 }}>
+                          <Typography variant="subtitle2" gutterBottom>
+                            Public Key:
+                          </Typography>
+                          <Paper sx={{ p: 2, bgcolor: 'grey.50', maxHeight: 200, overflow: 'auto' }}>
+                            <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: '0.75rem', wordBreak: 'break-all' }}>
+                              {record.parsedData.publicKey}
+                            </Typography>
+                          </Paper>
+                        </Box>
+                      </Box>
                       
                       <Box>
                         <Typography variant="caption" color="text.secondary">
@@ -355,6 +356,34 @@ export function DkimChecker({ onBack }: DkimCheckerProps) {
                   </AccordionDetails>
                 </Accordion>
               ))}
+            </CardContent>
+          </Card>
+
+          {/* Metadata */}
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Analysis Metadata
+              </Typography>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Domain />
+                  <Typography variant="body2">
+                    Request ID: {report.requestId}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Speed />
+                  <Typography variant="body2">
+                    Response Time: {report.responseTime}ms
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography variant="body2">
+                    Analyzed: {new Date(report.timestamp).toLocaleString()}
+                  </Typography>
+                </Box>
+              </Box>
             </CardContent>
           </Card>
         </Box>

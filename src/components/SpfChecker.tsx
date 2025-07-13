@@ -181,7 +181,54 @@ export function SpfChecker({ onBack }: SpfCheckerProps) {
             </CardContent>
           </Card>
 
-          {/* SPF Records */}
+          {/* Score Breakdown */}
+          <Card sx={{ mb: 4 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Security Score Breakdown
+              </Typography>
+              <List>
+                {report.scoringResults.scoreItems.map((item, index) => (
+                  <Box key={index}>
+                    <ListItem>
+                      <ListItemIcon>
+                        {item.passed ? (
+                          <CheckCircle color="success" />
+                        ) : (
+                          <ErrorIcon color="error" />
+                        )}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography variant="body1" fontWeight={600}>
+                              {item.name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {item.score}/{item.maxScore} points
+                            </Typography>
+                          </Box>
+                        }
+                        secondary={
+                          <Box sx={{ mt: 1 }}>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                              {item.description}
+                            </Typography>
+                            <Typography variant="body2" color="text.primary">
+                              {item.details}
+                            </Typography>
+                          </Box>
+                        }
+                      />
+                    </ListItem>
+                    {index < report.scoringResults.scoreItems.length - 1 && <Divider />}
+                  </Box>
+                ))}
+              </List>
+            </CardContent>
+          </Card>
+
+          {/* SPF Records Analysis */}
           <Card sx={{ mb: 4 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -224,6 +271,25 @@ export function SpfChecker({ onBack }: SpfCheckerProps) {
             </CardContent>
           </Card>
 
+          {/* Raw SPF Records */}
+          <Card sx={{ mb: 4 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Raw SPF Records
+              </Typography>
+              {report.spfRecords.map((record, index) => (
+                <Paper key={index} variant="outlined" sx={{ p: 2, mb: 2, backgroundColor: '#f8f9fa' }}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    {record.domain}:
+                  </Typography>
+                  <Typography variant="body2" fontFamily="monospace" sx={{ wordBreak: 'break-all' }}>
+                    {record.spfRecord}
+                  </Typography>
+                </Paper>
+              ))}
+            </CardContent>
+          </Card>
+
           {/* Validation Results */}
           <Card sx={{ mb: 4 }}>
             <CardContent>
@@ -255,50 +321,31 @@ export function SpfChecker({ onBack }: SpfCheckerProps) {
             </CardContent>
           </Card>
 
-          {/* Scoring Details */}
+          {/* Metadata */}
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Scoring Details
+                Analysis Metadata
               </Typography>
-              <List>
-                {report.scoringResults.scoreItems.map((item, index) => (
-                  <Box key={index}>
-                    <ListItem>
-                      <ListItemIcon>
-                        {item.passed ? (
-                          <CheckCircle color="success" />
-                        ) : (
-                          <ErrorIcon color="error" />
-                        )}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography variant="body1" fontWeight={600}>
-                              {item.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {item.score}/{item.maxScore} points
-                            </Typography>
-                          </Box>
-                        }
-                        secondary={
-                          <Box sx={{ mt: 1 }}>
-                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                              {item.description}
-                            </Typography>
-                            <Typography variant="body2" color="text.primary">
-                              {item.details}
-                            </Typography>
-                          </Box>
-                        }
-                      />
-                    </ListItem>
-                    {index < report.scoringResults.scoreItems.length - 1 && <Divider />}
-                  </Box>
-                ))}
-              </List>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Domain />
+                  <Typography variant="body2">
+                    Request ID: {report.requestId}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Speed />
+                  <Typography variant="body2">
+                    Response Time: {report.responseTime}ms
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography variant="body2">
+                    Analyzed: {new Date(report.timestamp).toLocaleString()}
+                  </Typography>
+                </Box>
+              </Box>
             </CardContent>
           </Card>
         </Box>

@@ -12,6 +12,7 @@ import { DomainInput } from './components/DomainInput';
 import { SecurityDashboard } from './components/SecurityDashboard';
 import { SpfChecker } from './components/SpfChecker';
 import { DkimChecker } from './components/DkimChecker';
+import { DmarcChecker } from './components/DmarcChecker';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import type { SecurityReport } from './types/security';
@@ -70,7 +71,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<SecurityReport | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState<'main' | 'spf' | 'dkim'>('main');
+  const [currentPage, setCurrentPage] = useState<'main' | 'spf' | 'dkim' | 'dmarc'>('main');
 
   const handleSearch = async (domain: string) => {
     setLoading(true);
@@ -94,7 +95,7 @@ function App() {
     }
   };
 
-  const handleNavigation = (page: 'main' | 'spf' | 'dkim') => {
+  const handleNavigation = (page: 'main' | 'spf' | 'dkim' | 'dmarc') => {
     setCurrentPage(page);
     setReport(null);
     setError(null);
@@ -128,8 +129,10 @@ function App() {
             </Container>
           ) : currentPage === 'spf' ? (
             <SpfChecker onBack={() => handleNavigation('main')} />
-          ) : (
+          ) : currentPage === 'dkim' ? (
             <DkimChecker onBack={() => handleNavigation('main')} />
+          ) : (
+            <DmarcChecker onBack={() => handleNavigation('main')} />
           )}
         </Box>
 

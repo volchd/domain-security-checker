@@ -2,7 +2,7 @@ import { Box, Container, Typography, Link, Divider } from '@mui/material';
 import { GitHub, Security, Code } from '@mui/icons-material';
 
 interface FooterProps {
-  onNavigate?: (page: 'main' | 'spf' | 'dkim') => void;
+  onNavigate?: (page: 'main' | 'spf' | 'dkim' | 'dmarc') => void;
 }
 
 export const Footer = ({ onNavigate }: FooterProps) => {
@@ -77,11 +77,18 @@ export const Footer = ({ onNavigate }: FooterProps) => {
                   DKIM Checker
                 </Link>
                 <Link 
-                  href="#" 
+                  component="button"
+                  onClick={() => onNavigate?.('dmarc')}
                   sx={{ 
                     color: '#64748b', 
                     textDecoration: 'none',
-                    '&:hover': { color: '#667eea' }
+                    '&:hover': { color: '#667eea' },
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    fontFamily: 'inherit',
+                    fontSize: 'inherit'
                   }}
                 >
                   DMARC Checker

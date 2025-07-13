@@ -1,0 +1,80 @@
+{
+  "record": {
+    "domain": "gene.com",
+    "rawRecord": "v=DMARC1; p=reject; sp=quarantine; rua=mailto:8f5c056d@mxtoolbox.dmarc-report.com,mailto:dmarc@ayba8dhs.uriports.com; ruf=mailto:8f5c056d@forensics.dmarc-report.com,mailto:dmarc@ayba8dhs.uriports.com; fo=1; pct=100",
+    "parsedData": {
+      "version": "DMARC1",
+      "policy": "reject",
+      "subdomainPolicy": "quarantine",
+      "reportEmails": [
+        "8f5c056d@mxtoolbox.dmarc-report.com",
+        "dmarc@ayba8dhs.uriports.com"
+      ],
+      "forensicEmails": [
+        "8f5c056d@forensics.dmarc-report.com",
+        "dmarc@ayba8dhs.uriports.com"
+      ],
+      "failureOptions": ["1"],
+      "percentage": 100
+    },
+    "retrievedAt": "2025-07-11T18:04:55.023Z"
+  },
+  "score": {
+    "totalScore": 35,
+    "maxPossibleScore": 40,
+    "percentage": 88,
+    "scoreItems": [
+      {
+        "name": "DMARC Record Present",
+        "description": "DMARC TXT record found at _dmarc.domain. If missing, that's a major gap.",
+        "score": 10,
+        "maxScore": 10,
+        "passed": true,
+        "details": "DMARC record found"
+      },
+      {
+        "name": "DMARC Policy Enforcement",
+        "description": "The strictness of the DMARC policy (p=): reject=10, quarantine=8, none=3.",
+        "score": 10,
+        "maxScore": 10,
+        "passed": true,
+        "details": "Policy is 'reject' (full enforcement)"
+      },
+      {
+        "name": "DMARC Coverage for Subdomains",
+        "description": "Subdomain policy in place (sp=) and not weaker than p, or not needed.",
+        "score": 0,
+        "maxScore": 5,
+        "passed": false,
+        "details": "sp=quarantine (weaker than p)"
+      },
+      {
+        "name": "DMARC Alignment Mode",
+        "description": "Alignment setting (aspf/adkim): 2 points if relaxed (default) or strict, 0 if misconfigured.",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "aspf=r, adkim=r"
+      },
+      {
+        "name": "DMARC Reporting (RUA)",
+        "description": "Aggregate reporting address (rua) is specified to receive feedback.",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "rua=8f5c056d@mxtoolbox.dmarc-report.com, dmarc@ayba8dhs.uriports.com"
+      },
+      {
+        "name": "DMARC Policy Percentage",
+        "description": "If a policy is enforced (quarantine/reject), check that pct is 100 (full coverage).",
+        "score": 5,
+        "maxScore": 5,
+        "passed": true,
+        "details": "pct=100"
+      }
+    ]
+  },
+  "requestId": "dcb80945-58a7-4de8-8aa6-51ed27cb9b05",
+  "responseTime": 612,
+  "timestamp": "2025-07-11T18:04:55.023Z"
+}

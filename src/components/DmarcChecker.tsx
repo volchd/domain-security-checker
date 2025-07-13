@@ -11,16 +11,13 @@ import {
   Alert,
   CircularProgress,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   List,
   ListItem,
   ListItemText,
   ListItemIcon,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material';
 import {
   CheckCircle,
@@ -28,8 +25,9 @@ import {
   Domain,
   Speed,
   Grade,
-  Email,
   Security,
+  Info,
+  ExpandMore,
 } from '@mui/icons-material';
 import type { DmarcReport } from '../types/dmarc';
 
@@ -106,6 +104,10 @@ export function DmarcChecker({ onBack }: DmarcCheckerProps) {
       case 'none': return 'error';
       default: return 'default';
     }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleString();
   };
 
   return (
@@ -241,154 +243,137 @@ export function DmarcChecker({ onBack }: DmarcCheckerProps) {
               <Typography variant="h6" gutterBottom>
                 DMARC Record Analysis
               </Typography>
-              <TableContainer component={Paper} variant="outlined">
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Field</TableCell>
-                      <TableCell>Value</TableCell>
-                      <TableCell>Status</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>Version</TableCell>
-                      <TableCell>
-                        <Typography variant="body2" fontFamily="monospace">
-                          {report.record.parsedData.version}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          label="Valid"
-                          size="small"
-                          color="success"
-                        />
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Policy (p=)</TableCell>
-                      <TableCell>
-                        <Typography variant="body2" fontFamily="monospace">
-                          {report.record.parsedData.policy}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          label={report.record.parsedData.policy}
-                          size="small"
-                          color={getPolicyColor(report.record.parsedData.policy)}
-                        />
-                      </TableCell>
-                    </TableRow>
-                    {report.record.parsedData.subdomainPolicy && (
-                      <TableRow>
-                        <TableCell>Subdomain Policy (sp=)</TableCell>
-                        <TableCell>
-                          <Typography variant="body2" fontFamily="monospace">
-                            {report.record.parsedData.subdomainPolicy}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={report.record.parsedData.subdomainPolicy}
-                            size="small"
-                            color={getPolicyColor(report.record.parsedData.subdomainPolicy)}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    )}
+              <Accordion sx={{ mb: 1 }}>
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%', flexWrap: 'wrap' }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', minWidth: '120px' }}>
+                      Domain: {report.record.domain}
+                    </Typography>
+                    <Chip
+                      label={`v${report.record.parsedData.version}`}
+                      size="small"
+                      variant="outlined"
+                    />
+                    <Chip
+                      label={report.record.parsedData.policy}
+                      size="small"
+                      color={getPolicyColor(report.record.parsedData.policy)}
+                    />
                     {report.record.parsedData.percentage && (
-                      <TableRow>
-                        <TableCell>Percentage (pct=)</TableCell>
-                        <TableCell>
-                          <Typography variant="body2" fontFamily="monospace">
-                            {report.record.parsedData.percentage}%
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={report.record.parsedData.percentage === 100 ? "Full Coverage" : "Partial Coverage"}
-                            size="small"
-                            color={report.record.parsedData.percentage === 100 ? "success" : "warning"}
-                          />
-                        </TableCell>
-                      </TableRow>
+                      <Chip
+                        label={`${report.record.parsedData.percentage}% coverage`}
+                        size="small"
+                        color={report.record.parsedData.percentage === 100 ? 'success' : 'warning'}
+                      />
                     )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </CardContent>
-          </Card>
-
-          {/* Raw DMARC Record */}
-          <Card sx={{ mb: 4 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Raw DMARC Record
-              </Typography>
-              <Paper variant="outlined" sx={{ p: 2, backgroundColor: '#f8f9fa' }}>
-                <Typography variant="body2" fontFamily="monospace" sx={{ wordBreak: 'break-all' }}>
-                  {report.record.rawRecord}
-                </Typography>
-              </Paper>
-            </CardContent>
-          </Card>
-
-          {/* Reporting Configuration */}
-          {(report.record.parsedData.reportEmails || report.record.parsedData.forensicEmails) && (
-            <Card sx={{ mb: 4 }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Reporting Configuration
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
-                  {report.record.parsedData.reportEmails && (
-                    <Box sx={{ flex: 1 }}>
-                      <Typography variant="subtitle1" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Email />
-                        Aggregate Reports (rua)
+                  </Box>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Box>
+                      <Typography variant="subtitle2" gutterBottom>
+                        Raw DMARC Record:
                       </Typography>
-                      <List dense>
-                        {report.record.parsedData.reportEmails.map((email, index) => (
-                          <ListItem key={index} sx={{ py: 0.5 }}>
-                            <ListItemIcon sx={{ minWidth: 32 }}>
-                              <Email fontSize="small" color="primary" />
-                            </ListItemIcon>
-                            <ListItemText 
-                              primary={email}
-                              primaryTypographyProps={{ fontFamily: 'monospace', fontSize: '0.875rem' }}
+                      <Paper sx={{ p: 2, bgcolor: 'grey.50' }}>
+                        <Typography variant="body2" sx={{ fontFamily: 'monospace', wordBreak: 'break-all' }}>
+                          {report.record.rawRecord}
+                        </Typography>
+                      </Paper>
+                    </Box>
+                    
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
+                      <Box sx={{ flex: 1 }}>
+                        <Typography variant="subtitle2" gutterBottom>
+                          Policy Configuration:
+                        </Typography>
+                        <List dense>
+                          <ListItem>
+                            <ListItemIcon><Info fontSize="small" /></ListItemIcon>
+                            <ListItemText
+                              primary="Version"
+                              secondary={report.record.parsedData.version}
                             />
                           </ListItem>
-                        ))}
-                      </List>
-                    </Box>
-                  )}
-                  {report.record.parsedData.forensicEmails && (
-                    <Box sx={{ flex: 1 }}>
-                      <Typography variant="subtitle1" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Email />
-                        Forensic Reports (ruf)
-                      </Typography>
-                      <List dense>
-                        {report.record.parsedData.forensicEmails.map((email, index) => (
-                          <ListItem key={index} sx={{ py: 0.5 }}>
-                            <ListItemIcon sx={{ minWidth: 32 }}>
-                              <Email fontSize="small" color="secondary" />
-                            </ListItemIcon>
-                            <ListItemText 
-                              primary={email}
-                              primaryTypographyProps={{ fontFamily: 'monospace', fontSize: '0.875rem' }}
+                          <ListItem>
+                            <ListItemIcon><Security fontSize="small" /></ListItemIcon>
+                            <ListItemText
+                              primary="Policy (p=)"
+                              secondary={report.record.parsedData.policy}
                             />
                           </ListItem>
-                        ))}
-                      </List>
+                          {report.record.parsedData.subdomainPolicy && (
+                            <ListItem>
+                              <ListItemIcon><Domain fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Subdomain Policy (sp=)"
+                                secondary={report.record.parsedData.subdomainPolicy}
+                              />
+                            </ListItem>
+                          )}
+                          {report.record.parsedData.percentage && (
+                            <ListItem>
+                              <ListItemIcon><Info fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Percentage (pct=)"
+                                secondary={`${report.record.parsedData.percentage}%`}
+                              />
+                            </ListItem>
+                          )}
+                        </List>
+                      </Box>
+                      <Box sx={{ flex: 1 }}>
+                        <Typography variant="subtitle2" gutterBottom>
+                          Reporting Configuration:
+                        </Typography>
+                        {report.record.parsedData.reportEmails && (
+                          <Box sx={{ mb: 2 }}>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                              Aggregate Reports (rua):
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                              {report.record.parsedData.reportEmails.map((email, index) => (
+                                <Chip
+                                  key={index}
+                                  label={email}
+                                  size="small"
+                                  variant="outlined"
+                                  color="primary"
+                                />
+                              ))}
+                            </Box>
+                          </Box>
+                        )}
+                        {report.record.parsedData.forensicEmails && (
+                          <Box>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                              Forensic Reports (ruf):
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                              {report.record.parsedData.forensicEmails.map((email, index) => (
+                                <Chip
+                                  key={index}
+                                  label={email}
+                                  size="small"
+                                  variant="outlined"
+                                  color="secondary"
+                                />
+                              ))}
+                            </Box>
+                          </Box>
+                        )}
+                      </Box>
                     </Box>
-                  )}
-                </Box>
-              </CardContent>
-            </Card>
-          )}
+                    
+                    <Box>
+                      <Typography variant="caption" color="text.secondary">
+                        Retrieved at: {formatDate(report.record.retrievedAt)}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            </CardContent>
+          </Card>
 
           {/* Metadata */}
           <Card>

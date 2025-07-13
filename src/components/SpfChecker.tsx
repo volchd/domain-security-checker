@@ -11,12 +11,13 @@ import {
   Alert,
   CircularProgress,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material';
 import {
   CheckCircle,
@@ -25,6 +26,8 @@ import {
   Speed,
   Grade,
   Security,
+  Info,
+  ExpandMore,
 } from '@mui/icons-material';
 import type { SpfReport } from '../types/spf';
 
@@ -223,90 +226,96 @@ export function SpfChecker({ onBack }: SpfCheckerProps) {
               <Typography variant="h6" gutterBottom>
                 SPF Records Analysis
               </Typography>
-              <TableContainer component={Paper} variant="outlined">
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Domain</TableCell>
-                      <TableCell>SPF Record</TableCell>
-                      <TableCell>Type</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {report.spfRecords.map((record, index) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <Typography variant="body2" fontFamily="monospace">
-                            {record.domain}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Typography variant="body2" fontFamily="monospace" sx={{ wordBreak: 'break-all' }}>
+              {report.spfRecords.map((record, index) => (
+                <Accordion key={index} sx={{ mb: 1 }}>
+                  <AccordionSummary expandIcon={<ExpandMore />}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%', flexWrap: 'wrap' }}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 'bold', minWidth: '120px' }}>
+                        Domain: {record.domain}
+                      </Typography>
+                      <Chip
+                        label={record.type}
+                        size="small"
+                        color={record.type === 'initial' ? 'primary' : 'default'}
+                      />
+                      <Chip
+                        label={`${record.spfRecord.length} chars`}
+                        size="small"
+                        variant="outlined"
+                      />
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <Box>
+                        <Typography variant="subtitle2" gutterBottom>
+                          Raw SPF Record:
+                        </Typography>
+                        <Paper sx={{ p: 2, bgcolor: 'grey.50' }}>
+                          <Typography variant="body2" sx={{ fontFamily: 'monospace', wordBreak: 'break-all' }}>
                             {record.spfRecord}
                           </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={record.type}
-                            size="small"
-                            color={record.type === 'initial' ? 'primary' : 'default'}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </CardContent>
-          </Card>
-
-          {/* Raw SPF Records */}
-          <Card sx={{ mb: 4 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Raw SPF Records
-              </Typography>
-              {report.spfRecords.map((record, index) => (
-                <Paper key={index} variant="outlined" sx={{ p: 2, mb: 2, backgroundColor: '#f8f9fa' }}>
-                  <Typography variant="subtitle2" gutterBottom>
-                    {record.domain}:
-                  </Typography>
-                  <Typography variant="body2" fontFamily="monospace" sx={{ wordBreak: 'break-all' }}>
-                    {record.spfRecord}
-                  </Typography>
-                </Paper>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Validation Results */}
-          <Card sx={{ mb: 4 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Validation Results
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
-                {Object.entries(report.validationResults).map(([key, value]) => {
-                  if (key === 'firstAllQualifier') return null;
-                  return (
-                    <Box key={key} sx={{ minWidth: { xs: '100%', sm: '200px', md: '150px' } }}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        {getValidationIcon(value.isValid)}
-                        <Typography variant="body2">
-                          {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-                        </Typography>
+                        </Paper>
+                      </Box>
+                      
+                      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
+                        <Box sx={{ flex: 1 }}>
+                          <Typography variant="subtitle2" gutterBottom>
+                            Record Details:
+                          </Typography>
+                          <List dense>
+                            <ListItem>
+                              <ListItemIcon><Domain fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Domain"
+                                secondary={record.domain}
+                              />
+                            </ListItem>
+                            <ListItem>
+                              <ListItemIcon><Info fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Type"
+                                secondary={record.type}
+                              />
+                            </ListItem>
+                            <ListItem>
+                              <ListItemIcon><Security fontSize="small" /></ListItemIcon>
+                              <ListItemText
+                                primary="Record Length"
+                                secondary={`${record.spfRecord.length} characters`}
+                              />
+                            </ListItem>
+                          </List>
+                        </Box>
+                        <Box sx={{ flex: 1 }}>
+                          <Typography variant="subtitle2" gutterBottom>
+                            Validation Status:
+                          </Typography>
+                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                            {Object.entries(report.validationResults).map(([key, value]) => {
+                              if (key === 'firstAllQualifier') return null;
+                              return (
+                                <Chip
+                                  key={key}
+                                  label={key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                                  size="small"
+                                  color={value.isValid ? 'success' : 'error'}
+                                  variant="outlined"
+                                />
+                              );
+                            })}
+                          </Box>
+                          <Box sx={{ mt: 2 }}>
+                            <Typography variant="body2" color="text.secondary">
+                              All Qualifier: {report.validationResults.firstAllQualifier.qualifier}
+                            </Typography>
+                          </Box>
+                        </Box>
                       </Box>
                     </Box>
-                  );
-                })}
-                <Box sx={{ width: '100%' }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Typography variant="body2">
-                      All Qualifier: {report.validationResults.firstAllQualifier.qualifier}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
             </CardContent>
           </Card>
 

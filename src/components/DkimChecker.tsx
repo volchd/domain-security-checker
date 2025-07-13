@@ -178,7 +178,7 @@ export function DkimChecker({ onBack }: DkimCheckerProps) {
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Key />
+                    <Security />
                     <Typography variant="body2">
                       {report.records.length} DKIM records
                     </Typography>
@@ -194,28 +194,34 @@ export function DkimChecker({ onBack }: DkimCheckerProps) {
               <Typography variant="h6" gutterBottom>
                 Security Score Breakdown
               </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 {report.score.scoreItems.map((item, index) => (
-                  <Box key={index} sx={{ minWidth: { xs: '100%', md: 'calc(50% - 8px)' }, flex: 1 }}>
-                    <Box sx={{ p: 2, border: 1, borderColor: 'divider', borderRadius: 1 }}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <Box key={index} sx={{ 
+                    p: 2, 
+                    border: 1, 
+                    borderColor: item.passed ? 'success.light' : 'error.light',
+                    borderRadius: 1,
+                    backgroundColor: item.passed ? 'success.50' : 'error.50'
+                  }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
                         {getValidationIcon(item.passed)}
-                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
                           {item.name}
                         </Typography>
-                        <Chip
-                          label={`${item.score}/${item.maxScore}`}
-                          color={item.passed ? 'success' : 'error'}
-                          size="small"
-                        />
                       </Box>
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                        {item.description}
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>
-                        {item.details}
-                      </Typography>
+                      <Box sx={{ textAlign: 'right' }}>
+                        <Typography variant="body2" color="text.secondary">
+                          {item.score}/{item.maxScore} points
+                        </Typography>
+                      </Box>
                     </Box>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                      {item.description}
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>
+                      {item.details}
+                    </Typography>
                   </Box>
                 ))}
               </Box>

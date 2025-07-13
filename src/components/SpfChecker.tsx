@@ -10,7 +10,6 @@ import {
   Chip,
   Alert,
   CircularProgress,
-  Divider,
   Paper,
   Table,
   TableBody,
@@ -18,10 +17,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
 } from '@mui/material';
 import {
   CheckCircle,
@@ -29,6 +24,7 @@ import {
   Domain,
   Speed,
   Grade,
+  Security,
 } from '@mui/icons-material';
 import type { SpfReport } from '../types/spf';
 
@@ -171,7 +167,7 @@ export function SpfChecker({ onBack }: SpfCheckerProps) {
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Domain />
+                    <Security />
                     <Typography variant="body2">
                       {report.spfRecords.length} SPF records
                     </Typography>
@@ -187,44 +183,37 @@ export function SpfChecker({ onBack }: SpfCheckerProps) {
               <Typography variant="h6" gutterBottom>
                 Security Score Breakdown
               </Typography>
-              <List>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 {report.scoringResults.scoreItems.map((item, index) => (
-                  <Box key={index}>
-                    <ListItem>
-                      <ListItemIcon>
-                        {item.passed ? (
-                          <CheckCircle color="success" />
-                        ) : (
-                          <ErrorIcon color="error" />
-                        )}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography variant="body1" fontWeight={600}>
-                              {item.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {item.score}/{item.maxScore} points
-                            </Typography>
-                          </Box>
-                        }
-                        secondary={
-                          <Box sx={{ mt: 1 }}>
-                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                              {item.description}
-                            </Typography>
-                            <Typography variant="body2" color="text.primary">
-                              {item.details}
-                            </Typography>
-                          </Box>
-                        }
-                      />
-                    </ListItem>
-                    {index < report.scoringResults.scoreItems.length - 1 && <Divider />}
+                  <Box key={index} sx={{ 
+                    p: 2, 
+                    border: 1, 
+                    borderColor: item.passed ? 'success.light' : 'error.light',
+                    borderRadius: 1,
+                    backgroundColor: item.passed ? 'success.50' : 'error.50'
+                  }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
+                        {getValidationIcon(item.passed)}
+                        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                          {item.name}
+                        </Typography>
+                      </Box>
+                      <Box sx={{ textAlign: 'right' }}>
+                        <Typography variant="body2" color="text.secondary">
+                          {item.score}/{item.maxScore} points
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                      {item.description}
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>
+                      {item.details}
+                    </Typography>
                   </Box>
                 ))}
-              </List>
+              </Box>
             </CardContent>
           </Card>
 
